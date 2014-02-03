@@ -21,17 +21,13 @@ $("#pop-task").click(function(){
   var lRadio = $("#lifo-radio");
   // FIFO pop
   if (fRadio.is(":checked")) {
-    console.log("FIFO length: " + $("#task-container").children().length);
     if ($("#task-container").children().length > 0) {
-      console.log("fifo pop");
       $("#task-container").children()[0].remove();
     }
   }
   // LIFO pop
   else if (lRadio.is(":checked")) {
-    console.log("LIFO length: " + $("#task-container").children().length);
     if ($("#task-container").children().length > 0) {
-      console.log("lifo pop");
       var container = $("#task-container");
       var length = container.children().length;
       container.children()[length-1].remove();

@@ -1,6 +1,6 @@
 // Push task into the container
 $("#push-task").click(function(){
-  taskName = $("#new-task");
+  var taskName = $("#new-task");
 
   if (taskName.val() != "") {
     $("#task-container").append( "<li>" + taskName.val() + "</li>");
@@ -21,13 +21,13 @@ $("#pop-task").click(function(){
   var lRadio = $("#lifo-radio");
   // FIFO pop
   if (fRadio.is(":checked")) {
-    if ($("#task-container").has("li")) {
+    if ($("#task-container").children().length > 0) {
       $("#task-container").children()[0].remove();
     }
   }
   // LIFO pop
   else if (lRadio.is(":checked")) {
-    if ($("#task-container").has("li")) {
+    if ($("#task-container").children().length > 0) {
       var container = $("#task-container");
       var length = container.children().length;
       container.children()[length-1].remove();

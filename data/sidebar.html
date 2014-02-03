@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="stylesheet" type="text/css" href="sidebar.css"/>
+  <script src="jquery-2.1.0.js"></script>
 </head>
 <body>
   <input id="new-task" type="text"></input><br>
@@ -11,6 +12,8 @@
   <ul id="task-container">
   </ul>
   <hr>
+  <input id="fifo-radio" type="radio" name="pop" value="FIFO" checked>FIFO</input>
+  <input id="lifo-radio" type="radio" name="pop" value="LIFO">LIFO</input><br>
   <button id="pop-task">Pop</button>
   <script type="text/javascript" src="sidebar.js"></script>
 </body>

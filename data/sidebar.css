@@ -1,0 +1,20 @@
+.taskItem {
+  border: 1px solid yellow:;
+  background: green;
+  padding: 3px;
+  margin: 5px;
+  border-radius: 15px;
+}
+
+.title {
+  margin: 10px;
+}
+
+.del {
+  float: right;
+  margin-right: 10px;
+}
+
+.del:hover {
+  color: white;
+}

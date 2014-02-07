@@ -1,11 +1,30 @@
-// Push task into the container
+function Item(name) {
+  var taskItem = document.createElement("div");
+  taskItem.className = "taskItem";
+
+  var title = document.createElement("span");
+  title.className = "title";
+  title.textContent = name;
+  taskItem.appendChild(title);
+
+  var del = document.createElement("span");
+  del.className = "del";
+  del.textContent = "x";
+  taskItem.appendChild(del);
+
+  del.onclick = function() { 
+    taskItem.remove();
+  }
+
+  $("#task-container").append(taskItem);
+}
+
+// Push task into the container.
 $("#push-task").click(function(){
   var taskName = $("#new-task");
 
-  if (taskName.val() != "") {
-    $("#task-container").append( "<li>" + taskName.val() + "</li>");
-    $("#new-task").val("");
-  }
+  Item(taskName.val());
+  $("#new-task").val("");
 });
 
 // Submit task when pressed enter.

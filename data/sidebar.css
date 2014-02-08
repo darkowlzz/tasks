@@ -1,21 +1,31 @@
+* {
+  font-family: Helvetica;
+}
+
 body {
   background: rgba(0, 60, 128, 0.71);
 }
 
 .header {
   position: fixed;
-  top: 1%;
+  top: 0%;
   height: 50px;
-  width: 100%;
+  width: 87%;
   z-index: 2;
+  background: rgba(252, 249, 249, 0.79);
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .footer {
   position: fixed;
-  bottom: 1%;
+  bottom: 0%;
   height: 50px;
-  width: 100%;
+  width: 87%;
   z-index: 1;
+  background: rgba(252, 249, 249, 0.79);
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .empty {
@@ -23,15 +33,29 @@ body {
 }
 
 .elem {
-  margin: 0 auto;
+  margin: 5px auto;
+}
+
+.button {
+  border-radius: 15px;
+  background: white;
+  font-size: 80%;
+  text-align: center;
+  padding: 2px;
+  width: 45px;
+  cursor: pointer;
 }
 
 .taskItem {
-  border: 1px solid yellow:;
   background: white;
   padding: 3px;
   margin: 5px;
   border-radius: 15px;
+  font-size: 80%;
+}
+
+.taskItem:hover {
+  cursor: pointer;
 }
 
 .title {
@@ -41,8 +65,18 @@ body {
 .del {
   float: right;
   margin-right: 10px;
+  width: 18px;
+  text-align: center;
 }
 
 .del:hover {
+  background: black;
   color: white;
+  cursor: pointer;
+  border-radius: 115px;
+}
+
+.text {
+  font-size: 80%;
+  cursor: pointer;
 }

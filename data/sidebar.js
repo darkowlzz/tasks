@@ -22,9 +22,11 @@ function Item(name) {
 // Push task into the container.
 $("#push-task").click(function(){
   var taskName = $("#new-task");
-
-  Item(taskName.val());
-  $("#new-task").val("");
+  
+  if (taskName.val() != "") {
+    Item(taskName.val());
+    $("#new-task").val("");
+  }
 });
 
 // Submit task when pressed enter.

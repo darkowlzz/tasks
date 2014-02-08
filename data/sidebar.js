@@ -1,3 +1,4 @@
+// Create a task item.
 function Item(name) {
   var taskItem = document.createElement("div");
   taskItem.className = "taskItem";
@@ -27,6 +28,8 @@ $("#push-task").click(function(){
     Item(taskName.val());
     $("#new-task").val("");
   }
+  // Scroll to bottom.
+  $("html, body").animate({ scrollTop: $(document).height() }, 300);
 });
 
 // Submit task when pressed enter.
@@ -44,6 +47,8 @@ $("#pop-task").click(function(){
   if (fRadio.is(":checked")) {
     if ($("#task-container").children().length > 0) {
       $("#task-container").children()[0].remove();
+      // Scroll up.
+      $("html, body").animate({ scrollTop: 0 }, 300);
     }
   }
   // LIFO pop
@@ -52,6 +57,8 @@ $("#pop-task").click(function(){
       var container = $("#task-container");
       var length = container.children().length;
       container.children()[length-1].remove();
+      // Scroll down.
+      $("html, body").animate({ scrollTop: $(document).height() }, 300);
     }
   }
 });

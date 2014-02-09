@@ -1,3 +1,8 @@
+// Collect and create Task items.
+addon.port.on("list", (list) => {
+  list.forEach((task) => Item(task));
+});
+
 // Create a task item.
 function Item(name) {
   var taskItem = document.createElement("div");
@@ -14,6 +19,7 @@ function Item(name) {
   taskItem.appendChild(del);
 
   del.onclick = function() { 
+    addon.port.emit("pop", name);
     taskItem.remove();
   }
 
@@ -26,6 +32,9 @@ $("#push-task").click(function(){
   
   if (taskName.val() != "") {
     Item(taskName.val());
+    // Push task in simple-storage.
+    addon.port.emit("push", taskName.val());
+   
     $("#new-task").val("");
   }
   // Scroll to bottom.
@@ -46,7 +55,10 @@ $("#pop-task").click(function(){
   // FIFO pop
   if (fRadio.is(":checked")) {
     if ($("#task-container").children().length > 0) {
-      $("#task-container").children()[0].remove();
+      var removeTask = $("#task-container").children()[0];
+      // Remove from simple-storage.
+      addon.port.emit("pop", removeTask.firstChild.textContent)
+      removeTask.remove();
       // Scroll up.
       $("html, body").animate({ scrollTop: 0 }, 300);
     }
@@ -56,9 +68,14 @@ $("#pop-task").click(function(){
     if ($("#task-container").children().length > 0) {
       var container = $("#task-container");
       var length = container.children().length;
-      container.children()[length-1].remove();
+      var removeTask = container.children()[length-1];
+      addon.port.emit("pop", removeTask.firstChild.textContent);
+      removeTask.remove();
       // Scroll down.
       $("html, body").animate({ scrollTop: $(document).height() }, 300);
     }
   }
 });
+
+// Emit `ready` to let add-on script know that we are ready!
+addon.port.emit("ready");

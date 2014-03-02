@@ -1,16 +1,20 @@
-require(['scripts/jquery-2.1.0.js'], function () {
+require(['scripts/jquery-2.1.0.js', 'scripts/sidebarsync.js'], function (_, sidebarSync) {
 
     // Collect and create Task items.
     addon.port.on("list", (list) => {
       list.forEach((task) => Item(task));
     });
 
+    sidebarSync.on('pop', name => document.getElementById(name).remove());
+    sidebarSync.on('push', name => Item(name));
+
     // Create a task item.
     function Item(name) {
       var taskItem = document.createElement("div");
       taskItem.className = "taskItem";
+        taskItem.id = name;
 
-      var title = document.createElement("span");
+        var title = document.createElement("span");
       title.className = "title";
       title.textContent = name;
       taskItem.appendChild(title);
@@ -22,10 +26,11 @@ require(['scripts/jquery-2.1.0.js'], function () {
 
       del.onclick = function() {
         addon.port.emit("pop", name);
-        taskItem.remove();
-      }
+          sidebarSync.emit("pop", name);
+          taskItem.remove();
+      };
 
-      $("#task-container").append(taskItem);
+        $("#task-container").append(taskItem);
     }
 
     // Push task into the container.
@@ -36,8 +41,9 @@ require(['scripts/jquery-2.1.0.js'], function () {
         Item(taskName.val());
         // Push task in simple-storage.
         addon.port.emit("push", taskName.val());
+          sidebarSync.emit("push", taskName.val());
 
-        $("#new-task").val("");
+          $("#new-task").val("");
       }
       // Scroll to bottom.
       $("html, body").animate({ scrollTop: $(document).height() }, 300);
@@ -54,13 +60,16 @@ require(['scripts/jquery-2.1.0.js'], function () {
     $("#pop-task").click(function(){
       var fRadio = $("#fifo-radio");
       var lRadio = $("#lifo-radio");
-      // FIFO pop
+        fRadio.click(event => sidebarSync.emit('fifo'));
+        lRadio.click(event => sidebarSync.emit('lifo'));
+        // FIFO pop
       if (fRadio.is(":checked")) {
         if ($("#task-container").children().length > 0) {
           var removeTask = $("#task-container").children()[0];
           // Remove from simple-storage.
-          addon.port.emit("pop", removeTask.firstChild.textContent)
-          removeTask.remove();
+            addon.port.emit("pop", removeTask.firstChild.textContent);
+            sidebarSync.emit("pop", removeTask.firstChild.textContent);
+            removeTask.remove();
           // Scroll up.
           $("html, body").animate({ scrollTop: 0 }, 300);
         }
@@ -72,7 +81,8 @@ require(['scripts/jquery-2.1.0.js'], function () {
           var length = container.children().length;
           var removeTask = container.children()[length-1];
           addon.port.emit("pop", removeTask.firstChild.textContent);
-          removeTask.remove();
+            sidebarSync.emit("pop", removeTask.firstChild.textContent);
+            removeTask.remove();
           // Scroll down.
           $("html, body").animate({ scrollTop: $(document).height() }, 300);
         }

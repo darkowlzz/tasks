@@ -1,13 +1,25 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<!--
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * Help information in element titles are constructed from
+ * documentation: https://wiki.theory.org/BitTorrentSpecification
+ * which is licensed under the Creative Commons Attribution 3.0
+-->
+
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" type="text/css" href="sidebar.css"/>
+    <meta name="application-name" content="Tasks"/>
+    <meta name="description" content="Add-on Sidebar"/>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="sidebar.css"/>
 </head>
 <body>
   <div class="header">
     <div class="elem">
-      <input id="new-task" type="text"></input>
+        <input id="new-task" type="text">
     </div>
     <div class="elem">
       <div id="push-task" class="button">Push</div>

@@ -3,7 +3,10 @@
   "title": "tasks",
   "id": "tasks@darkowlzz",
   "description": "A Task organizer",
-  "author": "Sunny (darkowlzz) <indiasuny000@gmail.com>",
+  "author": [
+              "Sunny (darkowlzz) <indiasuny000@gmail.com>",
+              "decipher <rodneyd.teal@gmail.com>"
+            ],
   "license": "MPL 2.0",
   "version": "0.1"
 }

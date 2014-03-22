@@ -56,37 +56,6 @@ require(['scripts/jquery-2.1.0.js', 'scripts/sidebarsync.js'], function (_, side
     }
   });
 
-  // Task pop
-  $("#pop-task").click(function () {
-    var fRadio = $("#fifo-radio");
-    var lRadio = $("#lifo-radio");
-    // FIFO pop
-    if (fRadio.is(":checked")) {
-      if ($("#task-container").children().length > 0) {
-        var removeTask = $("#task-container").children()[0];
-        // Remove from simple-storage.
-        addon.port.emit("pop", removeTask.firstChild.textContent);
-        sidebarSync.emit("pop", removeTask.firstChild.textContent);
-        removeTask.remove();
-        // Scroll up.
-        $("html, body").animate({ scrollTop: 0 }, 300);
-      }
-    }
-    // LIFO pop
-    else if (lRadio.is(":checked")) {
-      if ($("#task-container").children().length > 0) {
-        var container = $("#task-container");
-        var length = container.children().length;
-        var removeTask = container.children()[length - 1];
-        addon.port.emit("pop", removeTask.firstChild.textContent);
-        sidebarSync.emit("pop", removeTask.firstChild.textContent);
-        removeTask.remove();
-        // Scroll down.
-        $("html, body").animate({ scrollTop: $(document).height() }, 300);
-      }
-    }
-  });
-
   // Emit `ready` to let add-on script know that we are ready!
   addon.port.emit("ready");
 });
